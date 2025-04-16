@@ -1,0 +1,117 @@
+# Plano de Desenvolvimento - Fase 1: Criação e Configuração do Banco de Dados
+
+## Contexto
+
+Este documento detalha o plano de desenvolvimento para a primeira fase do protótipo de chatbot para aulas, focando especificamente na criação e configuração do banco de dados no Supabase. Como se trata de um protótipo, todas as decisões e implementações priorizam a simplicidade e a funcionalidade, sem preocupações excessivas com segurança ou performance neste momento.
+
+## Documentos Fundacionais
+
+Este plano é baseado nos seguintes documentos fundacionais:
+- `docs/instructions/database-schema.md` - Esquema das tabelas
+- `docs/instructions/project_briefing.md` - Visão geral do projeto
+- `docs/instructions/project_structure.md` - Organização do projeto
+
+## 1. Preparação Inicial
+
+- **Configurar projeto no Supabase**
+  - Criar um novo projeto dedicado ao chatbot de aulas na organização existente
+  - Documentar todas as credenciais e URLs do projeto para uso posterior
+  - Preparar estrutura para futura migração entre contas Supabase (criar scripts de migração)
+
+- **Configurar ambiente de desenvolvimento**
+  - Utilizar Poetry para gestão de dependências do projeto
+  - Criar arquivo `pyproject.toml` para definição das dependências
+  - Configurar ambiente virtual do Poetry
+
+- **Configurar variáveis de ambiente**
+  - Criar arquivo `.env` no diretório `backend/src/config`
+  - Adicionar URL do projeto Supabase e chave de API anon
+  - Adicionar outras variáveis relevantes para configuração do ambiente
+
+- **Instalar dependências necessárias**
+  - Adicionar cliente Supabase ao Poetry (`pyproject.toml`)
+  - Adicionar biblioteca para processamento de CSV
+  - Configurar pacote para gerenciamento de variáveis de ambiente
+
+## 2. Implementação do Esquema de Banco de Dados
+
+- **Criar script SQL para geração das tabelas**
+  - Preparar o script conforme especificado em `database-schema.md`
+  - Implementar como uma migration independente para facilitar recriação do banco
+  - Incluir criação das tabelas courses e lessons com todas as colunas necessárias
+  - Definir restrições de unicidade conforme especificado
+  - Criar índice para otimização de consultas
+
+- **Executar script no Supabase**
+  - Utilizar interface SQL do Supabase ou Model Context Protocol (MCP) para executar o script
+  - Verificar se todas as tabelas, relacionamentos e restrições foram criadas corretamente
+
+## 3. Processo de Importação dos Dados
+
+- **Preparar arquivo de dados**
+  - Acessar o arquivo em `docs/internal_docs/cursos_classplay.csv`
+  - Filtrar para manter apenas registros com transcrições não vazias
+  - Verificar e limpar possíveis problemas nos dados (caracteres especiais, formatação)
+
+- **Desenvolver script de importação**
+  - Criar script no diretório `backend/src/tools` para automatizar o processo
+  - Implementar leitura do arquivo CSV em `docs/internal_docs/cursos_classplay.csv`
+  - Filtrar para manter apenas registros com transcrição não vazia
+  - Projetar fluxo de processamento e inserção dos dados
+
+- **Implementar lógica de inserção**
+  - Extrair combinações únicas para tabela `courses`
+  - Inserir dados na tabela `courses` usando Supabase
+  - Relacionar e inserir dados na tabela `lessons`
+  - Incluir logs de progresso e tratamento de erros
+
+- **Verificar a importação**
+  - Confirmar que todos os registros foram importados corretamente
+  - Validar integridade dos relacionamentos entre tabelas
+  - Gerar relatório de importação com contagens e possíveis problemas encontrados
+
+## 4. Implementação de Funções de Acesso ao Banco de Dados
+
+- **Desenvolver módulo `database.js` no diretório `backend/src/services`**
+  - Implementar função para obter lista de aulas para o dropdown de seleção
+  - Criar função para recuperar detalhes completos de uma aula específica por ID
+  - Incluir tratamento de erros adequado para todas as operações
+  - Formatar dados retornados para uso fácil pelo frontend e agente
+
+- **Implementar testes para funções de acesso**
+  - Criar script simples para testar as funções implementadas
+  - Verificar tratamento de erros e formatos de resposta
+
+## 5. Script de Migração para Facilitar Transferência
+
+- **Criar script de exportação/importação para migração**
+  - Implementar função para exportar dados completos em formato JSON ou SQL
+  - Preparar script para importar dados em novo ambiente Supabase
+  - Documentar processo de execução dos scripts para facilitar a migração futura
+
+## 6. Documentação e Finalização
+
+- **Atualizar documentação técnica**
+  - Criar documento detalhando a implementação do banco de dados
+  - Documentar processo de migração para facilitar transferência futura
+  - Adicionar instruções para manutenção e troubleshooting
+
+- **Preparar integração com próxima fase (Agente)**
+  - Garantir que funções de acesso estão prontas para integração com o agente
+  - Definir formato de dados para comunicação entre banco e agente
+
+## Observações Importantes
+
+1. **Priorização da simplicidade**: Como se trata de um protótipo, todas as implementações devem focar na funcionalidade básica, sem preocupações excessivas com segurança ou otimizações.
+
+2. **Preparação para migração**: Todos os scripts e estruturas devem ser criados pensando na futura migração para outra conta Supabase, garantindo que esse processo seja o mais simples possível.
+
+3. **Utilização do MCP**: Aproveitar o Model Context Protocol do Supabase para simplificar inserções e verificações no banco de dados quando aplicável.
+
+4. **Localização dos arquivos fundacionais**: 
+   - Esquema do banco: `docs/instructions/database-schema.md`
+   - Briefing do projeto: `docs/instructions/project_briefing.md`
+   - Estrutura do projeto: `docs/instructions/project_structure.md`
+   - Arquivo CSV de dados: `docs/internal_docs/cursos_classplay.csv`
+
+5. **Organização do código**: Manter a estrutura de diretórios conforme especificado em `project_structure.md` para garantir consistência no projeto.

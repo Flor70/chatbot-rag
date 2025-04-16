@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "chatbot-rag"
+version = "0.1.0"
+description = "Chatbot prototype for answering questions based on class transcriptions"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.9"
+supabase = "^2.3.0"
+pandas = "^2.1.0"
+python-dotenv = "^1.0.0"
+openai = "^1.5.0"
+requests = "^2.32.3"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+black = "^23.7.0"
+isort = "^5.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api" 

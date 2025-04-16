@@ -1,0 +1,60 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+
+# Verificação de Contexto de Tarefas Anteriores
+
+- **Antes de iniciar uma nova tarefa, verifique os logs das tarefas com dependência**
+  - Analise os arquivos `task_<id>_log.txt` no diretório `tasks/` para todas as tarefas dependentes
+  - Entenda o contexto e as decisões tomadas nas tarefas anteriores
+  - Verifique os arquivos criados e modificados para compreender a estrutura existente
+  - Observe as dependências adicionadas para manter consistência
+
+- **Processo recomendado para início de tarefas**
+  1. Execute `task-master show <id>` para ver os detalhes da tarefa
+  2. Identifique as dependências com `task-master show <id> | grep 'Dependencies'`
+  3. Para cada dependência, leia o arquivo de log correspondente: `tasks/task_<id>_log.txt`
+  4. Verifique os arquivos criados/modificados mencionados nos logs
+  5. Somente após compreender o contexto, inicie a implementação da nova tarefa
+
+- **Exemplos de comandos úteis para verificação de contexto**
+  ```bash
+  # Ver detalhes da tarefa atual
+  task-master show 3
+  
+  # Listar todas as tarefas concluídas (possíveis dependências)
+  task-master list --status=done
+  
+  # Ver logs de uma tarefa específica
+  cat tasks/task_2_log.txt
+  
+  # Verificar mudanças em um arquivo específico mencionado em um log
+  git log -p backend/config/environment.py
+  ```
+
+- **Criando consistência entre tarefas**
+  - ✅ DO: Mantenha o mesmo estilo de código e padrões das tarefas anteriores
+  - ✅ DO: Reuse componentes e abordagens implementados em tarefas dependentes
+  - ✅ DO: Referencie os logs anteriores para justificar decisões de design
+  - ❌ DON'T: Reimplemente funcionalidades já existentes
+  - ❌ DON'T: Modifique o comportamento de componentes sem entender seu propósito original
+
+- **Documentando relações entre tarefas**
+  - No arquivo de log da nova tarefa, mencione relações com tarefas anteriores
+  - Explique como a implementação atual estende ou utiliza trabalho anterior
+  - Documente quaisquer alterações em componentes criados em tarefas anteriores
+  - Exemplo:
+    ```
+    ## Relação com tarefas anteriores
+    
+    Esta implementação utiliza o serviço Supabase criado na tarefa 1.3 para
+    autenticar usuários, estendendo-o com funcionalidades de gerenciamento
+    de perfil implementadas na interface.
+    ```
+
+- **Resolvendo inconsistências**
+  - Se encontrar inconsistências com tarefas anteriores, documenta-as claramente
+  - Proponha alterações para manter a consistência do projeto como um todo
+  - Consulte o usuário sobre como proceder em caso de conflitos com implementações anteriores 

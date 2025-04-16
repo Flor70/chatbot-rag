@@ -1,0 +1,103 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+
+# Documentação de Tarefas Concluídas
+
+- **Crie um arquivo de log para cada tarefa/subtarefa antes de marcá-la como concluída**
+  - Antes de executar `task-master set-status --id=X --status=done`, crie um arquivo de documentação
+  - Nomeie o arquivo como `task_<numero_da_task>_log.txt` (ou `task_<numero>.<subnum>_log.txt` para subtarefas)
+  - Salve o arquivo no diretório `tasks/`
+
+- **Estrutura do arquivo de log**
+  ```
+  # Task ID: <id>
+  # Título: <título da tarefa>
+  # Data de conclusão: <data>
+  
+  ## Implementações realizadas
+  
+  1. <descrição da implementação 1>
+  2. <descrição da implementação 2>
+  ...
+  
+  ## Arquivos criados/modificados
+  
+  - `caminho/para/arquivo1.ext`: <descrição da modificação>
+  - `caminho/para/arquivo2.ext`: <descrição da modificação>
+  
+  ## Dependências adicionadas (se aplicável)
+  
+  - `<nome-da-dependência>`: <versão> - <motivo>
+  
+  ## Observações/Notas
+  
+  <Qualquer observação relevante sobre a implementação>
+  ```
+
+- **Exemplos de documentação de tarefas**
+  
+  ```
+  # Task ID: 1.4
+  # Título: Configure Environment Variables and Project Settings
+  # Data de conclusão: 2023-07-21
+  
+  ## Implementações realizadas
+  
+  1. Criado sistema de configuração baseado em arquivos .env
+  2. Implementado gerenciamento de chaves de API via Supabase
+  3. Configurado suporte para múltiplos ambientes (dev/prod)
+  4. Criada documentação de esquema de banco de dados
+  
+  ## Arquivos criados/modificados
+  
+  - `backend/config/environment.py`: Gerenciamento de variáveis de ambiente
+  - `backend/config/supabase_client.py`: Cliente Supabase com suporte a chaves
+  - `backend/config/ai_providers.py`: Configuração de provedores AI
+  - `backend/config/logging.py`: Sistema de logging configurável
+  - `backend/services/supabase_service.py`: Adicionado suporte para api_keys
+  - `backend/scripts/setup_project.py`: Migração de chaves API para Supabase
+  - `.env.example`: Template para variáveis de ambiente
+  
+  ## Dependências adicionadas
+  
+  - `python-dotenv`: ^1.0.0 - Carregamento de variáveis de ambiente
+  - `python-json-logger`: ^2.0.7 - Formatação de logs em JSON
+  
+  ## Observações/Notas
+  
+  As chaves de API são preferencialmente armazenadas na tabela api_keys do Supabase, 
+  com fallback para as chaves definidas no arquivo .env.
+  ```
+
+- **✅ DO: Documentar todas as alterações significativas**
+  - Liste todos os arquivos criados ou modificados para a tarefa
+  - Explique claramente o propósito de cada implementação
+  - Inclua informações sobre novas dependências
+
+- **✅ DO: Manter um formato consistente**
+  - Use o template fornecido para todas as tarefas
+  - Mantenha a estrutura de seções para facilitar referência futura
+  - Numere as implementações para maior clareza
+
+- **❌ DON'T: Atualizar o status sem criar o arquivo de log**
+  - Nunca execute `task-master set-status --id=X --status=done` sem antes criar o arquivo de log
+  - Não abandone a documentação, mesmo para tarefas simples
+
+- **❌ DON'T: Incluir chaves de API, senhas ou outros dados sensíveis nos logs**
+  - Mencione que variáveis sensíveis foram configuradas, mas não inclua seus valores
+  - Use placeholders como `your_api_key_here` em exemplos
+
+- **Fluxo de trabalho para concluir tarefas**
+  1. Implemente todas as funcionalidades requeridas pela tarefa
+  2. Crie o arquivo de log seguindo o formato acima
+  3. Execute `task-master set-status --id=X --status=done`
+  4. Prossiga para a próxima tarefa
+
+- **Integração com scripts de automação**
+  - Considere automatizar a criação do arquivo de log executando um script que:
+    - Liste arquivos modificados desde o início da tarefa
+    - Preencha automaticamente o template com esses arquivos
+    - Permita edição manual antes de finalizar 

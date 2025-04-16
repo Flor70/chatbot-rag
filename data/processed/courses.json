@@ -1,0 +1,51 @@
+[
+  {
+    "pilar": "Conteúdos",
+    "tipo": "Cursos",
+    "nome": "IA para Markeging Digital",
+    "descricao": "Course imported from CSV: IA para Markeging Digital",
+    "original_idx": 0
+  },
+  {
+    "pilar": "Conteúdos",
+    "tipo": "Masterclass",
+    "nome": "IA no Marketing",
+    "descricao": "Course imported from CSV: IA no Marketing",
+    "original_idx": 1
+  },
+  {
+    "pilar": "Conteúdos",
+    "tipo": "Cursos",
+    "nome": "IA Generativa para Marketing",
+    "descricao": "Course imported from CSV: IA Generativa para Marketing",
+    "original_idx": 2
+  },
+  {
+    "pilar": "Conteúdos",
+    "tipo": "Aula",
+    "nome": "O Mundo dos Agents",
+    "descricao": "Course imported from CSV: O Mundo dos Agents",
+    "original_idx": 3
+  },
+  {
+    "pilar": "Conteúdos",
+    "tipo": NaN,
+    "nome": "Microsoft Copilot",
+    "descricao": "Course imported from CSV: Microsoft Copilot",
+    "original_idx": 4
+  },
+  {
+    "pilar": "Conteúdos",
+    "tipo": "Aula",
+    "nome": "Introdução à Inteligência Artificial Generativa",
+    "descricao": "Course imported from CSV: Introdução à Inteligência Artificial Generativa",
+    "original_idx": 5
+  },
+  {
+    "pilar": "Conteúdos",
+    "tipo": "Cursos",
+    "nome": "IA para Advogados",
+    "descricao": "Course imported from CSV: IA para Advogados",
+    "original_idx": 6
+  }
+]
