@@ -1,8 +1,8 @@
-chatbot-aulas/
+chabot_rag/
 │
 ├── README.md                           # Documentação geral do projeto
 ├── pyproject.toml                      # Configuração do Poetry e dependências Python
-├── .env.example                        # Template de variáveis de ambiente
+├── .env                    # variáveis de ambiente
 │
 ├── frontend/                           # Interface do usuário
 │   ├── public/                         # Arquivos estáticos
@@ -35,11 +35,16 @@ chatbot-aulas/
 │   │   ├── src/                        # Código fonte Python
 │   │   │   ├── __init__.py             # Inicialização do módulo Python
 │   │   │   ├── main.py                 # Ponto de entrada para teste do ambiente
+│   │   │   ├── cli.py                  # Interface de linha de comando para o chatbot
+│   │   │   ├── test_agent.py           # Testes para o agente de chatbot
+│   │   │   ├── test_database_access.py # Testes para acesso ao banco de dados
+│   │   │   ├── test_connections.py     # Testes para conexões com serviços externos
 │   │   │   ├── config/                 # Configurações
 │   │   │   │   ├── __init__.py         # Inicialização do módulo de configuração
 │   │   │   │   └── environment.py      # Gerenciamento de variáveis de ambiente
 │   │   │   ├── services/               # Serviços do backend
 │   │   │   │   ├── __init__.py         # Inicialização do módulo de serviços
+│   │   │   │   ├── agent.py            # Implementação do agente de chatbot com RAG
 │   │   │   │   └── database.py         # Cliente Supabase e funções de acesso ao banco
 │   │   │   ├── migrations/             # Scripts SQL para criação do banco de dados
 │   │   │   │   ├── README.md           # Documentação sobre os scripts de migração
@@ -55,6 +60,8 @@ chatbot-aulas/
 │   │   │   ├── test_environment.py     # Testes para validação do ambiente
 │   │   │   ├── test_migration_sql.py   # Testes para validação da sintaxe SQL
 │   │   │   └── test_data_processor.py  # Testes para processamento de dados
+│   │   ├── chatbot_cli.py              # Script executável para interface de linha de comando
+│   │   ├── test_agent_runner.py        # Script executável para testes do agente
 │   │   ├── data_importer.py            # Script wrapper para importação de dados
 │   │   ├── execute_migration.py        # Script para execução da migração SQL
 │   │   └── verify_tables.py            # Script para verificação das tabelas no Supabase
@@ -68,9 +75,11 @@ chatbot-aulas/
 │   ├── tasks.json                      # Definição estruturada das tarefas
 │   ├── task_001.txt                    # Detalhes da tarefa 1
 │   ├── task_002.txt                    # Detalhes da tarefa 2
+│   ├── task_003.txt                    # Detalhes da tarefa 3
 │   │   // ... outros arquivos de tarefas
 │   ├── task_001_log.txt                # Log de implementação da tarefa 1
 │   ├── task_002_log.txt                # Log de implementação da tarefa 2
+│   ├── task_003_log.txt                # Log de implementação da tarefa 3
 │   │   // ... outros logs de tarefas
 │   └── database_plan_logs.txt          # Documento de onboarding do banco de dados
 │
@@ -78,4 +87,7 @@ chatbot-aulas/
     └── instructions/                   # Instruções do projeto
         ├── project_briefing.md         # Briefing do projeto
         ├── database-schema.md          # Esquema do banco de dados
+        ├── database_overview.txt       # Visão geral do banco de dados
+        ├── agents_overview.txt         # Visão geral da implementação do agente
+        ├── phase2_instructions.txt     # Instruções para a fase 2 do projeto
         └── project_structure.md        # Estrutura do projeto (este arquivo)
